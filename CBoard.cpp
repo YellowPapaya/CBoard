@@ -39,8 +39,10 @@ class CBoard {
 				
 		}
 	private:
+		// Thanks, PyAutoGui
 		std::unordered_map<std::string, KeyCode> keyboardMapping = {
 		// Alphanumeric stuff
+		{"0", XKeysymToKeycode(display, XStringToKeysym("0"))},
 		{"1", XKeysymToKeycode(display, XStringToKeysym("1"))},
 		{"2", XKeysymToKeycode(display, XStringToKeysym("2"))},
 		{"3", XKeysymToKeycode(display, XStringToKeysym("3"))},
