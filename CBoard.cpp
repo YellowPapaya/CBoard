@@ -14,16 +14,16 @@ class CBoard {
 			if ((key.length() == 1) && (isupper(key[0]) || (shiftSet.find(key) != std::string::npos))) {
 				XTestFakeKeyEvent(display, keyboardMapping["shift"], true, 0);
 			}
-			XTestFakeKeyEvent(display, keyboardMapping[key], True, 0);
-			XSync(display, True); // Flush queue without ending other events
+			XTestFakeKeyEvent(display, keyboardMapping[key], true, 0);
+			XSync(display, true); // Flush queue without ending other events
 		}
 
 		void keyUp (std::string key) {
 			if ((key.length() == 1) && (isupper(key[0]) || (shiftSet.find(key) != std::string::npos))) {
 				XTestFakeKeyEvent(display, keyboardMapping["shift"], false, 0);
 			}
-			XTestFakeKeyEvent(display, keyboardMapping[key], False, 0); 
-			XSync(display, True); 
+			XTestFakeKeyEvent(display, keyboardMapping[key], false, 0); 
+			XSync(display, true); 
 		}
 
 		void press(std::string key) {
@@ -40,6 +40,7 @@ class CBoard {
 		}
 	private:
 		std::unordered_map<std::string, KeyCode> keyboardMapping = {
+		// Alphanumeric stuff
 		{"1", XKeysymToKeycode(display, XStringToKeysym("1"))},
 		{"2", XKeysymToKeycode(display, XStringToKeysym("2"))},
 		{"3", XKeysymToKeycode(display, XStringToKeysym("3"))},
@@ -101,6 +102,7 @@ class CBoard {
 		{"X", XKeysymToKeycode(display, XStringToKeysym("X"))},
 		{"Y", XKeysymToKeycode(display, XStringToKeysym("Y"))},
 		{"Z", XKeysymToKeycode(display, XStringToKeysym("Z"))},
+		// Fancy keys
 		{"backspace",         XKeysymToKeycode(display, XStringToKeysym("BackSpace"))},
 		{"\b",                XKeysymToKeycode(display, XStringToKeysym("BackSpace"))},
 		{"tab",               XKeysymToKeycode(display, XStringToKeysym("Tab"))},
@@ -185,44 +187,44 @@ class CBoard {
 		{"ctrlright",         XKeysymToKeycode(display, XStringToKeysym("Control_R"))},
 		{"altleft",           XKeysymToKeycode(display, XStringToKeysym("Alt_L"))},
 		{"altright",          XKeysymToKeycode(display, XStringToKeysym("Alt_R"))},
-		{" ", XKeysymToKeycode(display, XStringToKeysym("space"))},
-		{"space", XKeysymToKeycode(display, XStringToKeysym("space"))},
-		{"\t", XKeysymToKeycode(display, XStringToKeysym("Tab"))},
-		{"\n", XKeysymToKeycode(display, XStringToKeysym("Return"))},
-		{"\r", XKeysymToKeycode(display, XStringToKeysym("Return"))},
-		{"\e", XKeysymToKeycode(display, XStringToKeysym("Escape"))},
-		{"!", XKeysymToKeycode(display, XStringToKeysym("exclam"))},
-		{"#", XKeysymToKeycode(display, XStringToKeysym("numbersign"))},
-		{"%", XKeysymToKeycode(display, XStringToKeysym("percent"))},
-		{"$", XKeysymToKeycode(display, XStringToKeysym("dollar"))},
-		{"&", XKeysymToKeycode(display, XStringToKeysym("ampersand"))},
-		{"\"", XKeysymToKeycode(display, XStringToKeysym("quotedbl"))},
-		{"'", XKeysymToKeycode(display, XStringToKeysym("apostrophe"))},
-		{"(", XKeysymToKeycode(display, XStringToKeysym("parenleft"))},
-		{")", XKeysymToKeycode(display, XStringToKeysym("parenright"))},
-		{"*", XKeysymToKeycode(display, XStringToKeysym("asterisk"))},
-		{"=", XKeysymToKeycode(display, XStringToKeysym("equal"))},
-		{"+", XKeysymToKeycode(display, XStringToKeysym("plus"))},
-		{",", XKeysymToKeycode(display, XStringToKeysym("comma"))},
-		{"-", XKeysymToKeycode(display, XStringToKeysym("minus"))},
-		{".", XKeysymToKeycode(display, XStringToKeysym("period"))},
-		{"/", XKeysymToKeycode(display, XStringToKeysym("slash"))},
-		{":", XKeysymToKeycode(display, XStringToKeysym("colon"))},
-		{";", XKeysymToKeycode(display, XStringToKeysym("semicolon"))},
-		{"<", XKeysymToKeycode(display, XStringToKeysym("less"))},
-		{">", XKeysymToKeycode(display, XStringToKeysym("greater"))},
-		{"?", XKeysymToKeycode(display, XStringToKeysym("question"))},
-		{"@", XKeysymToKeycode(display, XStringToKeysym("at"))},
-		{"[", XKeysymToKeycode(display, XStringToKeysym("bracketleft"))},
-		{"]", XKeysymToKeycode(display, XStringToKeysym("bracketright"))},
-		{"\\", XKeysymToKeycode(display, XStringToKeysym("backslash"))},
-		{"^", XKeysymToKeycode(display, XStringToKeysym("asciicircum"))},
-		{"_", XKeysymToKeycode(display, XStringToKeysym("underscore"))},
-		{"`", XKeysymToKeycode(display, XStringToKeysym("grave"))},
-		{"{", XKeysymToKeycode(display, XStringToKeysym("braceleft"))},
-		{"|", XKeysymToKeycode(display, XStringToKeysym("bar"))},
-		{"}", XKeysymToKeycode(display, XStringToKeysym("braceright"))},
-		{"~", XKeysymToKeycode(display, XStringToKeysym("asciitilde"))}
+		{" ", 		      XKeysymToKeycode(display, XStringToKeysym("space"))},
+		{"space",             XKeysymToKeycode(display, XStringToKeysym("space"))},
+		{"\t",                XKeysymToKeycode(display, XStringToKeysym("Tab"))},
+		{"\n",                XKeysymToKeycode(display, XStringToKeysym("Return"))},
+		{"\r",                XKeysymToKeycode(display, XStringToKeysym("Return"))},
+		{"\e",                XKeysymToKeycode(display, XStringToKeysym("Escape"))},
+		{"!",                 XKeysymToKeycode(display, XStringToKeysym("exclam"))},
+		{"#",                 XKeysymToKeycode(display, XStringToKeysym("numbersign"))},
+		{"%",                 XKeysymToKeycode(display, XStringToKeysym("percent"))},
+		{"$",                 XKeysymToKeycode(display, XStringToKeysym("dollar"))},
+		{"&",                 XKeysymToKeycode(display, XStringToKeysym("ampersand"))},
+		{"\"",                XKeysymToKeycode(display, XStringToKeysym("quotedbl"))},
+		{"'",                 XKeysymToKeycode(display, XStringToKeysym("apostrophe"))},
+		{"(",                 XKeysymToKeycode(display, XStringToKeysym("parenleft"))},
+		{")",                 XKeysymToKeycode(display, XStringToKeysym("parenright"))},
+		{"*",                 XKeysymToKeycode(display, XStringToKeysym("asterisk"))},
+		{"=",                 XKeysymToKeycode(display, XStringToKeysym("equal"))},
+		{"+",                 XKeysymToKeycode(display, XStringToKeysym("plus"))},
+		{",",                 XKeysymToKeycode(display, XStringToKeysym("comma"))},
+		{"-",                 XKeysymToKeycode(display, XStringToKeysym("minus"))},
+		{".",                 XKeysymToKeycode(display, XStringToKeysym("period"))},
+		{"/",                 XKeysymToKeycode(display, XStringToKeysym("slash"))},
+		{":",                 XKeysymToKeycode(display, XStringToKeysym("colon"))},
+		{";",                 XKeysymToKeycode(display, XStringToKeysym("semicolon"))},
+		{"<",                 XKeysymToKeycode(display, XStringToKeysym("less"))},
+		{">",                 XKeysymToKeycode(display, XStringToKeysym("greater"))},
+		{"?",                 XKeysymToKeycode(display, XStringToKeysym("question"))},
+		{"@",                 XKeysymToKeycode(display, XStringToKeysym("at"))},
+		{"[",                 XKeysymToKeycode(display, XStringToKeysym("bracketleft"))},
+		{"]",                 XKeysymToKeycode(display, XStringToKeysym("bracketright"))},
+		{"\\",                XKeysymToKeycode(display, XStringToKeysym("backslash"))},
+		{"^",                 XKeysymToKeycode(display, XStringToKeysym("asciicircum"))},
+		{"_",                 XKeysymToKeycode(display, XStringToKeysym("underscore"))},
+		{"`",                 XKeysymToKeycode(display, XStringToKeysym("grave"))},
+		{"{",                 XKeysymToKeycode(display, XStringToKeysym("braceleft"))},
+		{"|",                 XKeysymToKeycode(display, XStringToKeysym("bar"))},
+		{"}",                 XKeysymToKeycode(display, XStringToKeysym("braceright"))},
+		{"~",                 XKeysymToKeycode(display, XStringToKeysym("asciitilde"))}
 		};
 };
  
