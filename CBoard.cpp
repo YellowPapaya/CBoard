@@ -8,18 +8,25 @@
 class CBoard {
 	private:
 		Display* display = XOpenDisplay(NULL);
+		std::string shiftSet = "~!@#$%^&*()_+{}|:\"<>?";
 	public:
-		void keyDown(const char* key) {
+		void keyDown(std::string key) {
+			if ((key.length() == 1) && (isupper(key[0]) || (shiftSet.find(key) != std::string::npos))) {
+				XTestFakeKeyEvent(display, keyboardMapping["shift"], true, 0);
+			}
 			XTestFakeKeyEvent(display, keyboardMapping[key], True, 0);
 			XSync(display, True); // Flush queue without ending other events
 		}
 
-		void keyUp (const char* key) {
+		void keyUp (std::string key) {
+			if ((key.length() == 1) && (isupper(key[0]) || (shiftSet.find(key) != std::string::npos))) {
+				XTestFakeKeyEvent(display, keyboardMapping["shift"], false, 0);
+			}
 			XTestFakeKeyEvent(display, keyboardMapping[key], False, 0); 
 			XSync(display, True); 
 		}
 
-		void press(const char* key) {
+		void press(std::string key) {
 			keyDown(key);
 			keyUp(key);
 		}
@@ -27,13 +34,12 @@ class CBoard {
 		void typewrite (std::string text) {
 			for (char c:text) {
 				std::string str(1, c);
-				const char* cstr = str.c_str();
-				press(cstr);
+				press(str);
 			}
 				
 		}
 	private:
-		std::unordered_map<const char*, KeyCode> keyboardMapping = {
+		std::unordered_map<std::string, KeyCode> keyboardMapping = {
 		{"1", XKeysymToKeycode(display, XStringToKeysym("1"))},
 		{"2", XKeysymToKeycode(display, XStringToKeysym("2"))},
 		{"3", XKeysymToKeycode(display, XStringToKeysym("3"))},
@@ -220,17 +226,6 @@ class CBoard {
 };
  
 int main () {
-	sleep(1);
 	CBoard cb;
-	cb.press("A");
-	cb.press("a");
-	cb.press(" ");
-	cb.press("space");
-	cb.press("a");
-	cb.press("\b");
-	cb.press("enter");
-	cb.press("return");
-	cb.keyDown("ctrl");
-	cb.press("l");
-	cb.keyUp("ctrl");
+	cb.typewrite("Hello World!");
 }
