@@ -196,6 +196,7 @@ class CBoard {
 		{"%", XKeysymToKeycode(display, XStringToKeysym("percent"))},
 		{"$", XKeysymToKeycode(display, XStringToKeysym("dollar"))},
 		{"&", XKeysymToKeycode(display, XStringToKeysym("ampersand"))},
+		{"\"", XKeysymToKeycode(display, XStringToKeysym("quotedbl"))},
 		{"'", XKeysymToKeycode(display, XStringToKeysym("apostrophe"))},
 		{"(", XKeysymToKeycode(display, XStringToKeysym("parenleft"))},
 		{")", XKeysymToKeycode(display, XStringToKeysym("parenright"))},
