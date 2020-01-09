@@ -229,3 +229,9 @@ class CBoard {
 		{"~",                 XKeysymToKeycode(display, XStringToKeysym("asciitilde"))}
 		};
 };
+
+int main() {
+	CBoard cb;
+	cb.typewrite("Hello World!");
+	cb.press("enter");
+}
